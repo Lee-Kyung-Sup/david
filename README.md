@@ -1,2 +1,2 @@
 # ai_codyssey
-Github-Codyssey 연
+Github-Codyssey 연동
