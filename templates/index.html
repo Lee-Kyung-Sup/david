@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>TTS 변환기</title>
+</head>
+<body>
+    <h1>🗣️ 텍스트 음성 변환기</h1>
+
+    <img src="{{ url_for('static', filename='david.jpg') }}" alt="David 이미지" width="300" />
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul style="color: red;">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="text">텍스트 입력:</label><br />
+        <textarea id="text" name="text" rows="4" cols="50" placeholder="변환할 텍스트를 입력하세요."></textarea><br /><br />
+
+        <label for="lang">언어 선택:</label>
+        <select id="lang" name="lang">
+            <option value="ko" {% if lang == 'ko' %}selected{% endif %}>한국어</option>
+            <option value="en" {% if lang == 'en' %}selected{% endif %}>영어</option>
+            <option value="ja" {% if lang == 'ja' %}selected{% endif %}>일본어</option>
+            <option value="es" {% if lang == 'es' %}selected{% endif %}>스페인어</option>
+        </select><br /><br />
+
+        <button type="submit">음성 변환</button>
+    </form>
+
+    {% if audio_file %}
+    <h2>🔊 변환된 음성 재생</h2>
+    <audio controls autoplay>
+        <source src="{{ url_for('static', filename=audiofile) }}" type="audio/mpeg" />
+        브라우저가 audio 태그를 지원하지 않습니다.
+    </audio>
+    {% endif %}
+</body>
+</html>
